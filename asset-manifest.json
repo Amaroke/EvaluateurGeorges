@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/EvaluateurGeorges/static/css/main.39426274.css",
+    "main.js": "/EvaluateurGeorges/static/js/main.641c61fc.js",
+    "index.html": "/EvaluateurGeorges/index.html",
+    "main.39426274.css.map": "/EvaluateurGeorges/static/css/main.39426274.css.map",
+    "main.641c61fc.js.map": "/EvaluateurGeorges/static/js/main.641c61fc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.39426274.css",
+    "static/js/main.641c61fc.js"
+  ]
+}
