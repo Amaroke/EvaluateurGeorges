@@ -1,10 +1,10 @@
 import "./Image.css";
-import RandomImage from "./RandomImage";
+import ZoomImage from "./ZoomImage";
 
 export default function Image() {
     return (
         <div>
-            <RandomImage/>
+            <ZoomImage/>
         </div>
     );
 }
