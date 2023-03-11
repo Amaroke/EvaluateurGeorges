@@ -1,9 +1,10 @@
 import "./Image.css";
+import RandomImage from "./RandomImage";
 
 export default function Image() {
     return (
         <div>
-            <img src="image1.jpg" alt="Image 1" />
+            <RandomImage/>
         </div>
     );
 }
