@@ -2,9 +2,9 @@ import "./Button.css";
 
 export default function Button() {
     return (
-        <button className="center red"
+        <button className="button"
                 type="button">
-            Add to favorites
+            Pick me !
         </button>
     );
 }

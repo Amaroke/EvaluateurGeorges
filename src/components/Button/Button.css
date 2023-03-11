@@ -1,5 +1,14 @@
-.red {
-    color: red;
-    background-color: red;
-    width: 1000px;
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #3498db;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2980b9;
 }

@@ -11,13 +11,6 @@ header {
     background-color: #eee;
 }
 
-select {
-    font-size: 16px;
-    padding: 6px 10px;
-    border: none;
-    border-radius: 4px;
-}
-
 main {
     display: flex;
     justify-content: center;
@@ -28,27 +21,4 @@ main {
 div {
     margin: 0 20px;
     text-align: center;
-}
-
-img {
-    width: 300px;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    background-color: #3498db;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #2980b9;
 }
