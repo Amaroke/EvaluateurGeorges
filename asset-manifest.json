@@ -1,13 +1,16 @@
 {
   "files": {
-    "main.css": "/EvaluateurGeorges/static/css/main.39426274.css",
-    "main.js": "/EvaluateurGeorges/static/js/main.641c61fc.js",
+    "main.css": "/EvaluateurGeorges/static/css/main.e7873759.css",
+    "main.js": "/EvaluateurGeorges/static/js/main.66cd448c.js",
+    "static/media/barb_0001-4133_1919_num_5_1_T1_0036_0003.png": "/EvaluateurGeorges/static/media/barb_0001-4133_1919_num_5_1_T1_0036_0003.d132de4962d155cc341d.png",
+    "static/media/barb_0001-4133_1919_num_5_1_T1_0005_0000.png": "/EvaluateurGeorges/static/media/barb_0001-4133_1919_num_5_1_T1_0005_0000.0e50994dce600457b120.png",
+    "static/media/barb_0001-4133_1919_num_5_1_T1_0001_0000.png": "/EvaluateurGeorges/static/media/barb_0001-4133_1919_num_5_1_T1_0001_0000.cf3e0a3344847b705431.png",
     "index.html": "/EvaluateurGeorges/index.html",
-    "main.39426274.css.map": "/EvaluateurGeorges/static/css/main.39426274.css.map",
-    "main.641c61fc.js.map": "/EvaluateurGeorges/static/js/main.641c61fc.js.map"
+    "main.e7873759.css.map": "/EvaluateurGeorges/static/css/main.e7873759.css.map",
+    "main.66cd448c.js.map": "/EvaluateurGeorges/static/js/main.66cd448c.js.map"
   },
   "entrypoints": [
-    "static/css/main.39426274.css",
-    "static/js/main.641c61fc.js"
+    "static/css/main.e7873759.css",
+    "static/js/main.66cd448c.js"
   ]
 }
