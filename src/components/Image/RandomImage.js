@@ -5,7 +5,7 @@ export default function RandomImage() {
 
     useEffect(() => {
         const getImage = async () => {
-            const images = await importAll(require.context('./../Fascicules', false, /\.(png|jpe?g|svg)$/));
+            const images = await importAll(require.context('../../assets/pages', false, /\.(png|jpe?g|svg)$/));
             //TODO Trier les images selon leurs méthodes de nettoyages respectives.
             const randomIndex = Math.floor(Math.random() * images.length);
             setImageSrc(images[randomIndex]);
@@ -18,6 +18,6 @@ export default function RandomImage() {
     };
 
     return (
-        <img src={imageSrc} alt="random image" />
+        <img src={imageSrc} alt="random image"/>
     );
 }
