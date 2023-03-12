@@ -4,3 +4,9 @@ select {
     border: none;
     border-radius: 4px;
 }
+
+.menu {
+    padding-right: 1px;
+    color: white;
+    font-size: 20px;
+}

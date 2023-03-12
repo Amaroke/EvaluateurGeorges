@@ -10,11 +10,11 @@ function App() {
                 <Menu/>
             </header>
             <main>
-                <div>
+                <div className="image">
                     <Image/>
                     <Button/>
                 </div>
-                <div>
+                <div className="image">
                     <Image/>
                     <Button/>
                 </div>

@@ -1,3 +1,4 @@
+/*
 import React, {useEffect, useState} from "react";
 
 export default function RandomImage() {
@@ -18,6 +19,8 @@ export default function RandomImage() {
     };
 
     return (
-        <img src={imageSrc} alt="random image"/>
+        <img src={imageSrc} alt="photo_page"/>
     );
 }
+*/
+
