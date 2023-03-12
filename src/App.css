@@ -22,3 +22,23 @@ main {
     margin: 0 20px;
     text-align: center;
 }
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(3);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    .modal {
+        width: 60%;
+        transform: translate(-50%, -50%) scale(2);
+    }
+}
