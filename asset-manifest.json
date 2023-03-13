@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/EvaluateurGeorges/static/css/main.25db9f14.css",
-    "main.js": "/EvaluateurGeorges/static/js/main.d7fda9b3.js",
+    "main.css": "/EvaluateurGeorges/static/css/main.9bcc0745.css",
+    "main.js": "/EvaluateurGeorges/static/js/main.86494da5.js",
     "static/media/barb_0001-4133_1919_num_5_1_T1_0021_0000.png": "/EvaluateurGeorges/static/media/barb_0001-4133_1919_num_5_1_T1_0021_0000.4c54728e9026b00e4d2e.png",
     "static/media/barb_0001-4133_1919_num_5_1_T1_0021_0000_approximation1.png": "/EvaluateurGeorges/static/media/barb_0001-4133_1919_num_5_1_T1_0021_0000_approximation1.318097aa4bfcf4cc80df.png",
     "static/media/barb_0001-4133_1919_num_5_1_T1_0613_0000.png": "/EvaluateurGeorges/static/media/barb_0001-4133_1919_num_5_1_T1_0613_0000.912efdacd231625f8e9e.png",
@@ -18,11 +18,11 @@
     "static/media/barb_0001-4133_1919_num_5_1_T1_0021_0000_extrapolation.png": "/EvaluateurGeorges/static/media/barb_0001-4133_1919_num_5_1_T1_0021_0000_extrapolation.098f3be2037d2e8c0a5f.png",
     "static/media/barb_0001-4133_1920_num_6_1_T1_0012_0000_approximation1.png": "/EvaluateurGeorges/static/media/barb_0001-4133_1920_num_6_1_T1_0012_0000_approximation1.5dbcef5f5a31248f6fbb.png",
     "index.html": "/EvaluateurGeorges/index.html",
-    "main.25db9f14.css.map": "/EvaluateurGeorges/static/css/main.25db9f14.css.map",
-    "main.d7fda9b3.js.map": "/EvaluateurGeorges/static/js/main.d7fda9b3.js.map"
+    "main.9bcc0745.css.map": "/EvaluateurGeorges/static/css/main.9bcc0745.css.map",
+    "main.86494da5.js.map": "/EvaluateurGeorges/static/js/main.86494da5.js.map"
   },
   "entrypoints": [
-    "static/css/main.25db9f14.css",
-    "static/js/main.d7fda9b3.js"
+    "static/css/main.9bcc0745.css",
+    "static/js/main.86494da5.js"
   ]
 }
