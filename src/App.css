@@ -32,6 +32,7 @@ button {
 button:hover {
     background-color: #2980b9;
 }
+
 select {
     font-size: 16px;
     padding: 6px 10px;

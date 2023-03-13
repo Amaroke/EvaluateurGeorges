@@ -13,15 +13,14 @@ const imageNames = [
 // Création d'un objet contenant toutes les images
 const images = {};
 for (let name of imageNames) {
-    images[name] = require(`./assets/pages/${name}/${name}_original.png`);
-    images[`${name}_expert`] = require(`./assets/pages/${name}/${name}_resultat_expert.png`);
-    images[`${name}_v1`] = require(`./assets/pages/${name}/${name}_resultat_outil_v1.png`);
-    images[`${name}_v2`] = require(`./assets/pages/${name}/${name}_resultat_outil_v2.png`);
-    images[`${name}_v3`] = require(`./assets/pages/${name}/${name}_resultat_outil_v3.png`);
+    images[name] = require(`./assets/pages/${name}/${name}.png`);
+    images[`${name}_expert`] = require(`./assets/pages/${name}/${name}_expert.png`);
+    images[`${name}_approximation1`] = require(`./assets/pages/${name}/${name}_approximation1.png`);
+    images[`${name}_approximation2`] = require(`./assets/pages/${name}/${name}_approximation2.png`);
+    images[`${name}_extrapolation`] = require(`./assets/pages/${name}/${name}_extrapolation.png`);
 }
 
-// Image par défaut TODO: à changer
-let imageSrc = images["barb_0001-4133_1919_num_5_1_T1_0021_0000"];
+let imageSrc = imageNames[0]
 
 // Modale de connexion
 function PasswordModal({setPassword, errorMessage}) {
@@ -55,6 +54,7 @@ export default function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [, setIsModalOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [imageScores, setImageScores] = useState({});
 
     useEffect(() => {
         const password = Cookies.get('password');
@@ -73,7 +73,15 @@ export default function App() {
 
     function handleSelectChange(event) {
         setSelectedImage(event.target.value);
-        imageSrc = images[event.target.value];
+        imageSrc = event.target.value;
+    }
+
+    function handleImageScore(imageName) {
+        setImageScores({
+            ...imageScores,
+            [imageName]: (imageScores[imageName] || 0) + 1
+        });
+        console.log(imageScores);
     }
 
     function handlePasswordSubmit(submittedPassword) {
@@ -88,6 +96,21 @@ export default function App() {
 
     const [selectedImage, setSelectedImage] = useState(Object.keys(images)[0]);
 
+    const matchingImages = [];
+
+    for (let key in images) {
+        if (key.includes(imageSrc)) {
+            matchingImages.push(key);
+        }
+    }
+
+    let img1 = matchingImages[Math.floor(Math.random() * matchingImages.length)];
+    let img2 = matchingImages[Math.floor(Math.random() * matchingImages.length)];
+
+    while (img2 === img1) {
+        img2 = matchingImages[Math.floor(Math.random() * matchingImages.length)];
+    }
+
     return (
         <div>
             {isLoggedIn ? (
@@ -96,7 +119,7 @@ export default function App() {
                         <div className="menu">
                             {"Page sélectionnée : "}
                             <select value={selectedImage} onChange={handleSelectChange}>
-                                {Object.keys(images).map((imageName) => (
+                                {imageNames.map((imageName) => (
                                     <option key={imageName} value={imageName}>{imageName}</option>
                                 ))}
                             </select>
@@ -107,21 +130,25 @@ export default function App() {
                             <div>
                                 <TransformWrapper defaultScale={1} defaultPositionX={1} defaultPositionY={1}>
                                     <TransformComponent>
-                                        <img src={imageSrc} alt=""/>
+                                        <img src={images[img1]} alt=""/>
                                     </TransformComponent>
                                 </TransformWrapper>
                             </div>
-                            <button className="button" type="button"> Celle de gauche !</button>
+                            <button className="button" type="button"
+                                    onClick={() => handleImageScore(img1)}> Celle de gauche !
+                            </button>
                         </div>
                         <div className="image">
                             <div>
                                 <TransformWrapper defaultScale={1} defaultPositionX={1} defaultPositionY={1}>
                                     <TransformComponent>
-                                        <img src={imageSrc} alt=""/>
+                                        <img src={images[img2]} alt=""/>
                                     </TransformComponent>
                                 </TransformWrapper>
                             </div>
-                            <button className="button" type="button"> Celle de droite !</button>
+                            <button className="button" type="button"
+                                    onClick={() => handleImageScore(img2)}> Celle de droite !
+                            </button>
                         </div>
                     </main>
                 </div>
