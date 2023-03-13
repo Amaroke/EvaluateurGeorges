@@ -94,6 +94,28 @@ export default function App() {
         }
     }
 
+    //Fonction permettant d'exporter les données générés par le site dans un fichier au format CSV.
+    function handleExport(){
+        //Nécessaire pour rendre le fichier trouvable.
+        let content = "data:text/csv;charset=utf-8,";
+
+        //On ajoute les noms ainsi que les scores associés au fichier CSV.
+        for (const [nomImage, score] of Object.entries(imageScores)) {
+            content += `${nomImage}, ${score}\n`;
+        }
+
+        //Création d'un lien de téléchargement pour le fichier CSV.
+        const encodedUri = encodeURI(content);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "score.csv");
+
+        //Ajout du lien à la page.
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        }
+
     const [selectedImage, setSelectedImage] = useState(Object.keys(images)[0]);
 
     const matchingImages = [];
@@ -117,6 +139,9 @@ export default function App() {
                 <div>
                     <header>
                         <div className="menu">
+                            <button className="saveButton" type="button"
+                                    onClick={() => handleExport()}> Sauvegarder
+                            </button>
                             {"Page sélectionnée : "}
                             <select value={selectedImage} onChange={handleSelectChange}>
                                 {imageNames.map((imageName) => (
