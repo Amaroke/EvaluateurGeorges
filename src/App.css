@@ -33,6 +33,11 @@ button:hover {
     background-color: #2980b9;
 }
 
+button:disabled {
+    background-color: #3498db;
+    cursor: not-allowed;
+}
+
 select {
     font-size: 16px;
     padding: 6px 10px;

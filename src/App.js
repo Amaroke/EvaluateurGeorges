@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import Cookies from 'js-cookie';
 import {TransformComponent, TransformWrapper} from "react-zoom-pan-pinch";
+
 import './App.css';
 
 // Liste de tous les noms des images utilisées
@@ -34,6 +35,7 @@ function PasswordModal({setPassword, errorMessage}) {
         event.preventDefault();
         setPassword(passwordInput);
     };
+
 
     return (
         <div className="modal-background">
@@ -126,11 +128,27 @@ export default function App() {
         }
     }
 
-    let img1 = matchingImages[Math.floor(Math.random() * matchingImages.length)];
-    let img2 = matchingImages[Math.floor(Math.random() * matchingImages.length)];
+    let img0 = matchingImages[0];
+    let img1 = matchingImages[Math.floor(Math.random() * matchingImages.length - 1) + 1];
+    let img2 = matchingImages[Math.floor(Math.random() * matchingImages.length - 1) + 1];
 
     while (img2 === img1) {
-        img2 = matchingImages[Math.floor(Math.random() * matchingImages.length)];
+        img2 = matchingImages[Math.floor(Math.random() * matchingImages.length - 1) + 1];
+    }
+
+    const wrapperRef0 = useRef(null);
+    const wrapperRef1 = useRef(null);
+    const wrapperRef2 = useRef(null);
+
+    const handleZoomChange = (zoom) => {
+        if (zoom.scale === 1) {
+            wrapperRef0.current.setTransform(1, 1, 1);
+            wrapperRef1.current.setTransform(1, 1, 1);
+            wrapperRef2.current.setTransform(1, 1, 1);
+        }
+        wrapperRef0.current.setTransform(zoom.positionX, zoom.positionY, zoom.scale);
+        wrapperRef1.current.setTransform(zoom.positionX, zoom.positionY, zoom.scale);
+        wrapperRef2.current.setTransform(zoom.positionX, zoom.positionY, zoom.scale);
     }
 
     return (
@@ -152,27 +170,53 @@ export default function App() {
                     </header>
                     <main>
                         <div className="image">
-                            <div>
-                                <TransformWrapper defaultScale={1} defaultPositionX={1} defaultPositionY={1}>
-                                    <TransformComponent>
-                                        <img src={images[img1]} alt=""/>
-                                    </TransformComponent>
-                                </TransformWrapper>
-                            </div>
-                            <button className="button" type="button"
-                                    onClick={() => handleImageScore(img1)}> Celle de gauche !
+                            <TransformWrapper
+                                defaultScale={1}
+                                defaultPositionX={1}
+                                defaultPositionY={1}
+                                onWheel={(object) => handleZoomChange(object.state)}
+                                onPanning={(object) => handleZoomChange(object.state)}
+                                ref={wrapperRef0}
+                            >
+                                <TransformComponent>
+                                    <img src={images[img0]} alt=""/>
+                                </TransformComponent>
+                            </TransformWrapper>
+                            <button className="button" type="button" disabled="true"> Image originale
                             </button>
                         </div>
                         <div className="image">
-                            <div>
-                                <TransformWrapper defaultScale={1} defaultPositionX={1} defaultPositionY={1}>
-                                    <TransformComponent>
-                                        <img src={images[img2]} alt=""/>
-                                    </TransformComponent>
-                                </TransformWrapper>
-                            </div>
+                            <TransformWrapper
+                                defaultScale={1}
+                                defaultPositionX={1}
+                                defaultPositionY={1}
+                                onWheel={(object) => handleZoomChange(object.state)}
+                                onPanning={(object) => handleZoomChange(object.state)}
+                                ref={wrapperRef1}
+                            >
+                                <TransformComponent>
+                                    <img src={images[img1]} alt=""/>
+                                </TransformComponent>
+                            </TransformWrapper>
                             <button className="button" type="button"
-                                    onClick={() => handleImageScore(img2)}> Celle de droite !
+                                    onClick={() => handleImageScore(images[img1])}> Celle de gauche !
+                            </button>
+                        </div>
+                        <div className="image">
+                            <TransformWrapper
+                                defaultScale={1}
+                                defaultPositionX={1}
+                                defaultPositionY={1}
+                                onWheel={(object) => handleZoomChange(object.state)}
+                                onPanning={(object) => handleZoomChange(object.state)}
+                                ref={wrapperRef2}
+                            >
+                                <TransformComponent>
+                                    <img src={images[img2]} alt=""/>
+                                </TransformComponent>
+                            </TransformWrapper>
+                            <button className="button" type="button"
+                                    onClick={() => handleImageScore(images[img2])}> Celle de droite !
                             </button>
                         </div>
                     </main>
