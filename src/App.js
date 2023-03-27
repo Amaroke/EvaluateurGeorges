@@ -216,9 +216,8 @@ export default function App() {
                             alt="Étoile 4"
                         />
                     </button>
-                    <button className="button">✓</button>
                 </div>
-                <p>{descriptionRatings[selectedRating - 1]}</p>
+                <button className="button">{selectedRating === 0 ? "Indiquez une note" : descriptionRatings[selectedRating - 1]}</button>
             </div>
 
         );
@@ -276,36 +275,38 @@ export default function App() {
                                 </div>
                             </header>
                             <main>
-                                <div className="image">
-                                    <TransformWrapper
-                                        defaultScale={1}
-                                        defaultPositionX={1}
-                                        defaultPositionY={1}
-                                        onWheel={(object) => handleZoomChange(object.state)}
-                                        onPanning={(object) => handleZoomChange(object.state)}
-                                        ref={wrapperRef0}
-                                    >
-                                        <TransformComponent>
-                                            <img src={images[img0]} alt=""/>
-                                        </TransformComponent>
-                                    </TransformWrapper>
-                                    <button className="button" type="button" disabled="true"> Image originale
-                                    </button>
-                                </div>
-                                <div className="image">
-                                    <TransformWrapper
-                                        defaultScale={1}
-                                        defaultPositionX={1}
-                                        defaultPositionY={1}
-                                        onWheel={(object) => handleZoomChange(object.state)}
-                                        onPanning={(object) => handleZoomChange(object.state)}
-                                        ref={wrapperRef1}
-                                    >
-                                        <TransformComponent>
-                                            <img src={images[img1]} alt=""/>
-                                        </TransformComponent>
-                                    </TransformWrapper>
-                                    {starRating()}
+                                <div className="image-container">
+                                    <div className="image">
+                                        <TransformWrapper
+                                            defaultScale={1}
+                                            defaultPositionX={1}
+                                            defaultPositionY={1}
+                                            onWheel={(object) => handleZoomChange(object.state)}
+                                            onPanning={(object) => handleZoomChange(object.state)}
+                                            ref={wrapperRef0}
+                                        >
+                                            <TransformComponent>
+                                                <img src={images[img0]} alt=""/>
+                                            </TransformComponent>
+                                        </TransformWrapper>
+                                        <button className="button" type="button" disabled={true}> Image originale
+                                        </button>
+                                    </div>
+                                    <div className="image">
+                                        <TransformWrapper
+                                            defaultScale={1}
+                                            defaultPositionX={1}
+                                            defaultPositionY={1}
+                                            onWheel={(object) => handleZoomChange(object.state)}
+                                            onPanning={(object) => handleZoomChange(object.state)}
+                                            ref={wrapperRef1}
+                                        >
+                                            <TransformComponent>
+                                                <img src={images[img1]} alt=""/>
+                                            </TransformComponent>
+                                        </TransformWrapper>
+                                        {starRating()}
+                                    </div>
                                 </div>
                             </main>
                         </div>
@@ -325,58 +326,59 @@ export default function App() {
                             </div>
                         </header>
                         <main>
-                            <div className="image">
-                                <TransformWrapper
-                                    defaultScale={1}
-                                    defaultPositionX={1}
-                                    defaultPositionY={1}
-                                    onWheel={(object) => handleZoomChange(object.state)}
-                                    onPanning={(object) => handleZoomChange(object.state)}
-                                    ref={wrapperRef0}
-                                >
-                                    <TransformComponent>
-                                        <img src={images[img0]} alt=""/>
-                                    </TransformComponent>
-                                </TransformWrapper>
-                                <button className="button" type="button" disabled="true"> Image originale
-                                </button>
+                            <div className="image-container2">
+                                <div className="image">
+                                    <TransformWrapper
+                                        defaultScale={1}
+                                        defaultPositionX={1}
+                                        defaultPositionY={1}
+                                        onWheel={(object) => handleZoomChange(object.state)}
+                                        onPanning={(object) => handleZoomChange(object.state)}
+                                        ref={wrapperRef0}
+                                    >
+                                        <TransformComponent>
+                                            <img src={images[img0]} alt=""/>
+                                        </TransformComponent>
+                                    </TransformWrapper>
+                                    <button className="button" type="button" disabled={true}> Image originale
+                                    </button>
+                                </div>
+                                <div className="image">
+                                    <TransformWrapper
+                                        defaultScale={1}
+                                        defaultPositionX={1}
+                                        defaultPositionY={1}
+                                        onWheel={(object) => handleZoomChange(object.state)}
+                                        onPanning={(object) => handleZoomChange(object.state)}
+                                        ref={wrapperRef1}
+                                    >
+                                        <TransformComponent>
+                                            <img src={images[img1]} alt=""/>
+                                        </TransformComponent>
+                                    </TransformWrapper>
+                                    <button className="button" type="button"
+                                            onClick={() => handleImageScore(images[img1])}> Celle de gauche !
+                                    </button>
+                                </div>
+                                <div className="image">
+                                    <TransformWrapper
+                                        defaultScale={1}
+                                        defaultPositionX={1}
+                                        defaultPositionY={1}
+                                        onWheel={(object) => handleZoomChange(object.state)}
+                                        onPanning={(object) => handleZoomChange(object.state)}
+                                        ref={wrapperRef2}
+                                    >
+                                        <TransformComponent>
+                                            <img src={images[img2]} alt=""/>
+                                        </TransformComponent>
+                                    </TransformWrapper>
+                                    <button className="button" type="button"
+                                            onClick={() => handleImageScore(images[img2])}> Celle de droite !
+                                    </button>
+                                </div>
                             </div>
-                            <div className="image">
-                                <TransformWrapper
-                                    defaultScale={1}
-                                    defaultPositionX={1}
-                                    defaultPositionY={1}
-                                    onWheel={(object) => handleZoomChange(object.state)}
-                                    onPanning={(object) => handleZoomChange(object.state)}
-                                    ref={wrapperRef1}
-                                >
-                                    <TransformComponent>
-                                        <img src={images[img1]} alt=""/>
-                                    </TransformComponent>
-                                </TransformWrapper>
-                                <button className="button" type="button"
-                                        onClick={() => handleImageScore(images[img1])}> Celle de gauche !
-                                </button>
-                            </div>
-                            <div className="image">
-                                <TransformWrapper
-                                    defaultScale={1}
-                                    defaultPositionX={1}
-                                    defaultPositionY={1}
-                                    onWheel={(object) => handleZoomChange(object.state)}
-                                    onPanning={(object) => handleZoomChange(object.state)}
-                                    ref={wrapperRef2}
-                                >
-                                    <TransformComponent>
-                                        <img src={images[img2]} alt=""/>
-                                    </TransformComponent>
-                                </TransformWrapper>
-                                <button className="button" type="button"
-                                        onClick={() => handleImageScore(images[img2])}> Celle de droite !
-                                </button>
-                            </div>
-                            <button className="button" type="button" onClick={() => handleSecondPhase()}>Phase 2
-                            </button>
+                            <button className="button" type="button" onClick={() => handleSecondPhase()}>Phase 2</button>
                         </main>
                     </div>
             ) : (
