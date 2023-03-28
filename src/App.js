@@ -248,7 +248,7 @@ export default function App() {
         const encodedUri = encodeURI(content);
         const link = document.createElement("a");
         link.setAttribute("href", encodedUri);
-        link.setAttribute("download", "score.csv");
+        link.setAttribute("download", "indiquez_votre_nom_d_evaluateur.csv");
 
         // Ajout du lien à la page.
         document.body.appendChild(link);
