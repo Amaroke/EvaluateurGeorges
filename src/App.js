@@ -255,8 +255,7 @@ export default function App() {
                                     <button className="saveButton" type="button"
                                             onClick={() => handleExport()}> Sauvegarder
                                     </button>
-                                    {"Page sélectionnée : "} {selectedImage}
-
+                                    {(pageActuelle >= listeNomsImages.length) ? "Évaluation terminée, veuillez sauvegarder !" : ("Page sélectionnée (" + (pageActuelle + 1) + "/" + listeNomsImages.length + ") : ")} {selectedImage}
                                 </div>
                             </header>
                             <main>
@@ -302,7 +301,7 @@ export default function App() {
                                 <button className="saveButton" type="button"
                                         onClick={() => handleExport()}> Sauvegarder
                                 </button>
-                                {"Page sélectionnée : "} {selectedImage}
+                                {(pageActuelle >= listeNomsImages.length) ? "Évaluation terminée, veuillez sauvegarder !" : ("Page sélectionnée (" + (pageActuelle + 1) + "/" + listeNomsImages.length + ") : ")} {selectedImage}
                             </div>
                         </header>
                         <main>
