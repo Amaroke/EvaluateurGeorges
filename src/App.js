@@ -43,13 +43,14 @@ let img2 = matchingImages.splice(Math.floor(Math.random() * matchingImages.lengt
 let bestImg = null;
 let img3 = null;
 
+let imageScores = [];
+
 export default function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isPhase2, setIsPhase2] = useState(false);
     const [, setIsModalOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [selectedImage, setSelectedImage] = useState(Object.keys(images)[0]);
-    const [imageScores, setImageScores] = useState({});
     const [image1, setImage1] = useState(img1);
     const [image2, setImage2] = useState(img2);
     const [image3, setImage3] = useState(img3);
@@ -94,8 +95,6 @@ export default function App() {
     }
 
     function starRating() {
-
-
         return (
             <div>
                 <div className="button2-container">
@@ -176,6 +175,14 @@ export default function App() {
         if (matchingImages.length === 0) {
             //On récupère la meilleure image.
             bestImg = numeroImage === 1 ? img1[0] : img2[0];
+
+            var obj = {
+                name : bestImg,
+                rating : "BEST"
+            };
+
+            imageScores.push(obj);
+
             for (let i = 0; i < matchingImages2.length; ++i) {
                 //On enlève la meilleure image de la liste des images à noter.
                 if (matchingImages2[i] === bestImg) {
@@ -188,7 +195,7 @@ export default function App() {
                 }
             }
 
-            //On flush les images à noter.
+            //On mélange les images à noter.
             img3 = matchingImages2.splice(Math.floor(Math.random() * matchingImages.length - 1) + 1, 1);
             setImage3(img3);
 
@@ -204,7 +211,15 @@ export default function App() {
         }
     }
 
+    //Fonction qui permet d'afficher toutes les images à noter dans la pahse 2 de manière aléatoire.
     function handleSwapImage2() {
+        var obj = {
+            name : img3[0],
+            rating : selectedRating
+        };
+
+        imageScores.push(obj);
+
         img3 = matchingImages2.splice(Math.floor(Math.random() * matchingImages.length - 1) + 1, 1);
         setImage3(img3);
     }
@@ -225,8 +240,8 @@ export default function App() {
         let content = "data:text/csv;charset=utf-8,";
 
         // On ajoute les noms ainsi que les scores associés au fichier CSV.
-        for (const [nomImage, score] of Object.entries(imageScores)) {
-            content += `${nomImage}, ${score}\n`;
+        for (let i = 0; i < imageScores.length; ++i) {
+            content += `${imageScores[i].name}, ${imageScores[i].rating}\n`;
         }
 
         // Création d'un lien de téléchargement pour le fichier CSV.
