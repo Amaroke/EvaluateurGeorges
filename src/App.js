@@ -173,11 +173,9 @@ export default function App() {
     }
 
     function handleSwapImage(numeroImage) {
-        console.log(matchingImages);
         if (matchingImages.length === 0) {
             //On récupère la meilleure image.
-            bestImg = numeroImage === 1 ? img1 : img2;
-
+            bestImg = numeroImage === 1 ? img1[0] : img2[0];
             for (let i = 0; i < matchingImages2.length; ++i) {
                 //On enlève la meilleure image de la liste des images à noter.
                 if (matchingImages2[i] === bestImg) {
@@ -185,7 +183,7 @@ export default function App() {
                 }
 
                 //On enlève l'image originale de la liste des images à noter.
-                if (matchingImages2[i] === img0) {
+                if (matchingImages2[i] === img0[0]) {
                     matchingImages2.splice(i, 1);
                 }
             }
