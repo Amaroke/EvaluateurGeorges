@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import Cookies from 'js-cookie';
 import {TransformComponent, TransformWrapper} from "react-zoom-pan-pinch";
-import RatingElement from "./components/RatingElement";
 import PasswordModal from "./components/PasswordModal";
 import './App.css';
 
@@ -11,6 +10,10 @@ const imageNames = [
     "barb_0001-4133_1919_num_5_1_T1_0613_0000",
     "barb_0001-4133_1920_num_6_1_T1_0012_0000"
 ];
+
+// Import des images des étoiles
+const etoilePleine = require(`./assets/stars/etoile_pleine.png`);
+const etoileVide = require(`./assets/stars/etoile_vide.png`);
 
 // Création d'un objet contenant toutes les images
 const images = {};
@@ -24,16 +27,21 @@ for (let name of imageNames) {
 let imageSrc = imageNames[0]
 
 const matchingImages = [];
+const matchingImages2 = [];
 
 for (let key in images) {
     if (key.includes(imageSrc)) {
         matchingImages.push(key);
+        matchingImages2.push(key);
     }
 }
 
 let img0 = matchingImages.splice(0, 1)
 let img1 = matchingImages.splice(Math.floor(Math.random() * matchingImages.length - 1) + 1, 1);
 let img2 = matchingImages.splice(Math.floor(Math.random() * matchingImages.length - 1) + 1, 1);
+
+let bestImg = null;
+let img3 = null;
 
 export default function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -44,8 +52,7 @@ export default function App() {
     const [imageScores, setImageScores] = useState({});
     const [image1, setImage1] = useState(img1);
     const [image2, setImage2] = useState(img2);
-
-
+    const [image3, setImage3] = useState(img3)
 
     useEffect(() => {
         const password = Cookies.get('password');
@@ -70,6 +77,25 @@ export default function App() {
     function handleSwapImage(numeroImage) {
         console.log(matchingImages);
         if(matchingImages.length === 0){
+            //On récupère la meilleure image.
+            bestImg = numeroImage === 1 ? img1 : img2;
+
+            for (let i = 0; i < matchingImages2.length; ++i) {
+                //On enlève la meilleure image de la liste des images à noter.
+                if (matchingImages2[i] === bestImg) {
+                    matchingImages2.splice(i,1);
+                }
+
+                //On enlève l'image originale de la liste des images à noter.
+                if (matchingImages2[i] === img0) {
+                    matchingImages2.splice(i,1);
+                }
+            }
+
+            //On flush les images à noter.
+            img3 = matchingImages2.splice(Math.floor(Math.random() * matchingImages.length - 1) + 1, 1);
+            setImage3(img3);
+
             setIsPhase2(true) ;
         } else {
             if (numeroImage === 1) {
@@ -80,6 +106,11 @@ export default function App() {
             setImage1(img1);
             setImage2(img2);
         }
+    }
+
+    function handleSwapImage2(){
+        img3 = matchingImages2.splice(Math.floor(Math.random() * matchingImages.length - 1) + 1, 1);
+        setImage3(img3);
     }
 
     function handlePasswordSubmit(submittedPassword) {
@@ -175,7 +206,7 @@ export default function App() {
                                             ref={wrapperRef1}
                                         >
                                             <TransformComponent>
-                                                <img src={images[img1]} alt=""/>
+                                                <img src={images[image3]} alt=""/>
                                             </TransformComponent>
                                         </TransformWrapper>
                                         <RatingElement/>
@@ -260,4 +291,100 @@ export default function App() {
             )}
         </div>
     );
+
+    function RatingElement() {
+
+        const [rating1, setRating1] = useState(false);
+        const [rating2, setRating2] = useState(false);
+        const [rating3, setRating3] = useState(false);
+        const [rating4, setRating4] = useState(false);
+        const [selectedRating, setSelectedRating] = useState(0);
+        const descriptionRatings = ["Immonde", "Très nul", "Super", "Parfait"]
+
+        function handleRating(val, value, select) {
+            setSelectedRating(select)
+            switch (val) {
+                case 1:
+                    setRating1(value || select >= 1);
+                    setRating2(select >= 2 && !value)
+                    setRating3(select >= 3 && !value)
+                    setRating4(select >= 4 && !value)
+                    break;
+                case 2:
+                    setRating1(value || select >= 1);
+                    setRating2(value || select >= 2);
+                    setRating3(select >= 3 && !value)
+                    setRating4(select >= 4 && !value)
+                    break;
+                case 3:
+                    setRating1(value || select >= 1);
+                    setRating2(value || select >= 2);
+                    setRating3(value || select >= 3);
+                    setRating4(select >= 4 && !value)
+                    break;
+                case 4:
+                    setRating1(value || select >= 1);
+                    setRating2(value || select >= 2);
+                    setRating3(value || select >= 3);
+                    setRating4(value || select >= 4);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return (
+            <div>
+                <div className="button2-container">
+                    <button className="button2"
+                            data-rating="1"
+                            onClick={() => handleRating(1, false, 1)}
+                            onMouseOver={() => handleRating(1, true, selectedRating)}
+                            onMouseOut={() => handleRating(1, false, selectedRating)}
+                    >
+                        <img
+                            src={rating1 ? etoilePleine : etoileVide}
+                            alt="Étoile 1"
+                        />
+                    </button>
+                    <button className="button2"
+                            data-rating="2"
+                            onClick={() => handleRating(2, false, 2)}
+                            onMouseOver={() => handleRating(2, true, selectedRating)}
+                            onMouseOut={() => handleRating(2, false, selectedRating)}
+                    >
+                        <img
+                            src={rating2 ? etoilePleine : etoileVide}
+                            alt="Étoile 2"
+                        />
+                    </button>
+                    <button className="button2"
+                            data-rating="3"
+                            onClick={() => handleRating(3, false, 3)}
+                            onMouseOver={() => handleRating(3, true, selectedRating)}
+                            onMouseOut={() => handleRating(3, false, selectedRating)}
+                    >
+                        <img
+                            src={rating3 ? etoilePleine : etoileVide}
+                            alt="Étoile 3"
+                        />
+                    </button>
+                    <button className="button2"
+                            data-rating="4"
+                            onClick={() => handleRating(4, false, 4)}
+                            onMouseOver={() => handleRating(4, true, selectedRating)}
+                            onMouseOut={() => handleRating(4, false, selectedRating)}
+                    >
+                        <img
+                            src={rating4 ? etoilePleine : etoileVide}
+                            alt="Étoile 4"
+                        />
+                    </button>
+                </div>
+                <button
+                    className="button" onClick={handleSwapImage2()}>{selectedRating === 0 ? "Indiquez une note" : descriptionRatings[selectedRating - 1]}</button>
+            </div>
+
+        );
+    }
 }
