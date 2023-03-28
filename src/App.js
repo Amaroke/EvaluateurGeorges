@@ -1,7 +1,8 @@
 import React, {useState, useEffect, useRef} from 'react';
 import Cookies from 'js-cookie';
 import {TransformComponent, TransformWrapper} from "react-zoom-pan-pinch";
-
+import RatingElement from "./components/RatingElement";
+import PasswordModal from "./components/PasswordModal";
 import './App.css';
 
 // Liste de tous les noms des images utilisées
@@ -22,52 +23,29 @@ for (let name of imageNames) {
 }
 let imageSrc = imageNames[0]
 
-// Import des images des étoiles
-const etoilePleine = require(`./assets/stars/etoile_pleine.png`);
-const etoileVide = require(`./assets/stars/etoile_vide.png`);
+const matchingImages = [];
 
-// Modale de connexion
-function PasswordModal({setPassword, errorMessage}) {
-    const [passwordInput, setPasswordInput] = useState('');
-
-    const handlePasswordChange = (event) => {
-        setPasswordInput(event.target.value);
-    };
-
-    const handlePasswordSubmit = (event) => {
-        event.preventDefault();
-        setPassword(passwordInput);
-    };
-
-    return (
-        <div className="modal-background">
-            <div className="modal">
-                <form onSubmit={handlePasswordSubmit}>
-                    <h2>Veuillez saisir le mot de passe :</h2>
-                    {errorMessage && <p>{errorMessage}</p>}
-                    <input type="password" value={passwordInput} onChange={handlePasswordChange}/>
-                    <br/>
-                    <button type="submit">Se connecter</button>
-                </form>
-            </div>
-        </div>
-    );
+for (let key in images) {
+    if (key.includes(imageSrc)) {
+        matchingImages.push(key);
+    }
 }
+
+let img0 = matchingImages.splice(0, 1)
+let img1 = matchingImages.splice(Math.floor(Math.random() * matchingImages.length - 1) + 1, 1);
+let img2 = matchingImages.splice(Math.floor(Math.random() * matchingImages.length - 1) + 1, 1);
 
 export default function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isPhase2, setIsPhase2] = useState(false);
     const [, setIsModalOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-
+    const [selectedImage, setSelectedImage] = useState(Object.keys(images)[0]);
     const [imageScores, setImageScores] = useState({});
+    const [image1, setImage1] = useState(img1);
+    const [image2, setImage2] = useState(img2);
 
-    const [rating1, setRating1] = useState(false);
-    const [rating2, setRating2] = useState(false);
-    const [rating3, setRating3] = useState(false);
-    const [rating4, setRating4] = useState(false);
-    const [selectedRating, setSelectedRating] = useState(0);
-    const descriptionRatings = ["Immonde", "Très nul", "Super", "Parfait"]
+
 
     useEffect(() => {
         const password = Cookies.get('password');
@@ -89,12 +67,19 @@ export default function App() {
         imageSrc = event.target.value;
     }
 
-    function handleImageScore(imageName) {
-        setImageScores({
-            ...imageScores,
-            [imageName]: (imageScores[imageName] || 0) + selectedRating
-        });
-        console.log(imageScores);
+    function handleSwapImage(numeroImage) {
+        console.log(matchingImages);
+        if(matchingImages.length === 0){
+            setIsPhase2(true) ;
+        } else {
+            if (numeroImage === 1) {
+                img1 = matchingImages.splice(Math.floor(Math.random() * matchingImages.length - 1) + 1, 1);
+            } else {
+                img2 = matchingImages.splice(Math.floor(Math.random() * matchingImages.length - 1) + 1, 1);
+            }
+            setImage1(img1);
+            setImage2(img2);
+        }
     }
 
     function handlePasswordSubmit(submittedPassword) {
@@ -127,118 +112,6 @@ export default function App() {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-    }
-
-    // Fonction permettant de passer à la seconde phase de l'évaluation.
-    function handleSecondPhase() {
-        // Affiche de la phase 2
-        setIsPhase2(true)
-    }
-
-    function handleRating(val, value, select) {
-        setSelectedRating(select)
-        switch (val) {
-            case 1:
-                setRating1(value || select >= 1);
-                setRating2(select >= 2 && !value)
-                setRating3(select >= 3 && !value)
-                setRating4(select >= 4 && !value)
-                break;
-            case 2:
-                setRating1(value || select >= 1);
-                setRating2(value || select >= 2);
-                setRating3(select >= 3 && !value)
-                setRating4(select >= 4 && !value)
-                break;
-            case 3:
-                setRating1(value || select >= 1);
-                setRating2(value || select >= 2);
-                setRating3(value || select >= 3);
-                setRating4(select >= 4 && !value)
-                break;
-            case 4:
-                setRating1(value || select >= 1);
-                setRating2(value || select >= 2);
-                setRating3(value || select >= 3);
-                setRating4(value || select >= 4);
-                break;
-            default:
-                break;
-        }
-    }
-
-    // Fonction permettant de gérer la note d'une image.
-    function starRating() {
-        return (
-            <div>
-                <div className="button2-container">
-                    <button className="button2"
-                            data-rating="1"
-                            onClick={() => handleRating(1, false, 1)}
-                            onMouseOver={() => handleRating(1, true, selectedRating)}
-                            onMouseOut={() => handleRating(1, false, selectedRating)}
-                    >
-                        <img
-                            src={rating1 ? etoilePleine : etoileVide}
-                            alt="Étoile 1"
-                        />
-                    </button>
-                    <button className="button2"
-                            data-rating="2"
-                            onClick={() => handleRating(2, false, 2)}
-                            onMouseOver={() => handleRating(2, true, selectedRating)}
-                            onMouseOut={() => handleRating(2, false, selectedRating)}
-                    >
-                        <img
-                            src={rating2 ? etoilePleine : etoileVide}
-                            alt="Étoile 2"
-                        />
-                    </button>
-                    <button className="button2"
-                            data-rating="3"
-                            onClick={() => handleRating(3, false, 3)}
-                            onMouseOver={() => handleRating(3, true, selectedRating)}
-                            onMouseOut={() => handleRating(3, false, selectedRating)}
-                    >
-                        <img
-                            src={rating3 ? etoilePleine : etoileVide}
-                            alt="Étoile 3"
-                        />
-                    </button>
-                    <button className="button2"
-                            data-rating="4"
-                            onClick={() => handleRating(4, false, 4)}
-                            onMouseOver={() => handleRating(4, true, selectedRating)}
-                            onMouseOut={() => handleRating(4, false, selectedRating)}
-                    >
-                        <img
-                            src={rating4 ? etoilePleine : etoileVide}
-                            alt="Étoile 4"
-                        />
-                    </button>
-                </div>
-                <button className="button">{selectedRating === 0 ? "Indiquez une note" : descriptionRatings[selectedRating - 1]}</button>
-            </div>
-
-        );
-    }
-
-    const [selectedImage, setSelectedImage] = useState(Object.keys(images)[0]);
-
-    const matchingImages = [];
-
-    for (let key in images) {
-        if (key.includes(imageSrc)) {
-            matchingImages.push(key);
-        }
-    }
-
-    let img0 = matchingImages[0];
-    let img1 = matchingImages[Math.floor(Math.random() * matchingImages.length - 1) + 1];
-    let img2 = matchingImages[Math.floor(Math.random() * matchingImages.length - 1) + 1];
-
-    while (img2 === img1) {
-        img2 = matchingImages[Math.floor(Math.random() * matchingImages.length - 1) + 1];
     }
 
     const wrapperRef0 = useRef(null);
@@ -305,7 +178,7 @@ export default function App() {
                                                 <img src={images[img1]} alt=""/>
                                             </TransformComponent>
                                         </TransformWrapper>
-                                        {starRating()}
+                                        <RatingElement/>
                                     </div>
                                 </div>
                             </main>
@@ -353,11 +226,11 @@ export default function App() {
                                         ref={wrapperRef1}
                                     >
                                         <TransformComponent>
-                                            <img src={images[img1]} alt=""/>
+                                            <img src={images[image1]} alt=""/>
                                         </TransformComponent>
                                     </TransformWrapper>
                                     <button className="button" type="button"
-                                            onClick={() => handleImageScore(images[img1])}> Celle de gauche !
+                                            onClick={() => handleSwapImage(1)}> Celle de gauche !
                                     </button>
                                 </div>
                                 <div className="image">
@@ -370,15 +243,14 @@ export default function App() {
                                         ref={wrapperRef2}
                                     >
                                         <TransformComponent>
-                                            <img src={images[img2]} alt=""/>
+                                            <img src={images[image2]} alt=""/>
                                         </TransformComponent>
                                     </TransformWrapper>
                                     <button className="button" type="button"
-                                            onClick={() => handleImageScore(images[img2])}> Celle de droite !
+                                            onClick={() => handleSwapImage(2)}> Celle de droite !
                                     </button>
                                 </div>
                             </div>
-                            <button className="button" type="button" onClick={() => handleSecondPhase()}>Phase 2</button>
                         </main>
                     </div>
             ) : (
