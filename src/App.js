@@ -108,7 +108,7 @@ export default function App() {
             scoresImages.push(obj);
 
             for (let i = 0; i < nomsImagePageActuellePhase2.length; ++i) {
-                // On enlève la meilleure image de la liste des images à noter.
+                // TODO On enlève la meilleure image de la liste des images à noter ?
                 if (nomsImagePageActuellePhase2[i] === meilleureImage) {
                     nomsImagePageActuellePhase2.splice(i, 1);
                 }
@@ -125,7 +125,7 @@ export default function App() {
 
             setIsPhase2(true);
         } else {
-            if (numeroImage === 1) {
+            if (numeroImage === 2) {
                 img1 = nomsImagePageActuelle.splice(Math.floor(Math.random() * nomsImagePageActuelle.length - 1) + 1, 1);
             } else {
                 img2 = nomsImagePageActuelle.splice(Math.floor(Math.random() * nomsImagePageActuelle.length - 1) + 1, 1);
