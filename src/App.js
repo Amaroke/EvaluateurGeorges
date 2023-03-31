@@ -317,8 +317,9 @@ export default function App() {
                                                 <img src={images[image0]} alt=""/>
                                             </TransformComponent>
                                         </TransformWrapper>
-                                        <button className="button" type="button" disabled={true}> Image originale
-                                        </button>
+                                        <div className="texte-cadre">
+                                            <p className="lettre"> Image originale</p>
+                                        </div>
                                     </div>
                                     <div className="image">
                                         <TransformWrapper
@@ -363,8 +364,9 @@ export default function App() {
                                             <img src={images[image0]} alt=""/>
                                         </TransformComponent>
                                     </TransformWrapper>
-                                    <button className="button" type="button" disabled={true}> Image originale
-                                    </button>
+                                    <div className="texte-cadre">
+                                        <p className="lettre">Image originale</p>
+                                    </div>
                                 </div>
                                 <div className="image">
                                     <TransformWrapper
@@ -379,10 +381,12 @@ export default function App() {
                                             <img src={images[image1]} alt=""/>
                                         </TransformComponent>
                                     </TransformWrapper>
+                                    <div className="texte-cadre">
+                                        <p className="lettre">{lettre1}</p>
+                                    </div>
                                     <button className="button" type="button"
                                             onClick={() => imageSuivantePhase1(1)}> Celle de gauche !
                                     </button>
-                                    <p>{lettre1}</p>
                                 </div>
                                 <div className="image">
                                     <TransformWrapper
@@ -397,10 +401,12 @@ export default function App() {
                                             <img src={images[image2]} alt=""/>
                                         </TransformComponent>
                                     </TransformWrapper>
+                                    <div className="texte-cadre">
+                                        <p className="lettre">{lettre2}</p>
+                                    </div>
                                     <button className="button" type="button"
                                             onClick={() => imageSuivantePhase1(2)}> Celle de droite !
                                     </button>
-                                    <p>{lettre2}</p>
                                 </div>
                             </div>
                         </main>
