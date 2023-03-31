@@ -136,12 +136,7 @@ export default function App() {
             scoresImages.push(obj);
 
             for (let i = 0; i < nomsImagePageActuellePhase2.length; ++i) {
-                // TODO On enlève la meilleure image de la liste des images à noter ?
-                if (nomsImagePageActuellePhase2[i] === meilleureImage) {
-                    nomsImagePageActuellePhase2.splice(i, 1);
-                }
-
-                // On enlève l'image originale de la liste des images à noter.
+                 // On enlève l'image originale de la liste des images à noter.
                 if (nomsImagePageActuellePhase2[i] === imageOrigine[0]) {
                     nomsImagePageActuellePhase2.splice(i, 1);
                 }
