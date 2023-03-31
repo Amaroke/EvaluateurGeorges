@@ -58,11 +58,11 @@ for (let nom in images) {
 
 // Image d'origine de la phase 1
 let imageOrigine = nomsImagePageActuelle.splice(0, 1)
-// Images affichés lors de la phase 1
+// Images affichées lors de la phase 1
 let img1 = nomsImagePageActuelle.splice(Math.floor(Math.random() * nomsImagePageActuelle.length - 1) + 1, 1);
 let img2 = nomsImagePageActuelle.splice(Math.floor(Math.random() * nomsImagePageActuelle.length - 1) + 1, 1);
 
-// Images affichés lors de la phase 2
+// Images affichées lors de la phase 2
 let img3 = null;
 let meilleureImage = null;
 
@@ -112,7 +112,7 @@ export default function App() {
         }
     }, []);
 
-    // Fonction qui ferme le fenêtre modale
+    // Fonction qui ferme la fenêtre modale
     function handleCloseModal() {
         setIsModalOpen(false);
     }
@@ -141,7 +141,7 @@ export default function App() {
                     nomsImagePageActuellePhase2.splice(i, 1);
                 }
 
-                // On enlève l'image originale de la liste des images à noter..
+                // On enlève l'image originale de la liste des images à noter.
                 if (nomsImagePageActuellePhase2[i] === imageOrigine[0]) {
                     nomsImagePageActuellePhase2.splice(i, 1);
                 }
@@ -214,7 +214,7 @@ export default function App() {
         // On fixe la note de l'image
         setSelectedRating(noteSelectionnee)
 
-        // Affichage des étoiles (et effet de séléction)
+        // Affichage des étoiles (et effet de selection)
         switch (imageNotee) {
             case 1:
                 setRating1(note || noteSelectionnee >= 1);
