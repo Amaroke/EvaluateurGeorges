@@ -36,11 +36,11 @@ const etoileVide = require(`./assets/stars/etoile_vide.png`);
 const images = {};
 for (let name of listeNomsImages) {
     images[name] = require(`./assets/pages/Origine/${name}.png`);
-    images[`${name}_approximation1`] = require(`./assets/pages/Approximation1x1/${name}.png`);
-    images[`${name}_approximation2`] = require(`./assets/pages/Approximation2x3/${name}.png`);
-    images[`${name}_extrapolation`] = require(`./assets/pages/Extrapolation1x1/${name}.png`);
-    images[`${name}_approximation2`] = require(`./assets/pages/Extrapolation2x3/${name}.png`);
-    images[`${name}_extrapolation`] = require(`./assets/pages/Interpolation1x1/${name}.png`);
+    images[`${name}_approximation1x1`] = require(`./assets/pages/Approximation1x1/${name}.png`);
+    images[`${name}_approximation2x3`] = require(`./assets/pages/Approximation2x3/${name}.png`);
+    images[`${name}_extrapolation1x1`] = require(`./assets/pages/Extrapolation1x1/${name}.png`);
+    images[`${name}_extrapolation2x3`] = require(`./assets/pages/Extrapolation2x3/${name}.png`);
+    images[`${name}_interpolation1x1`] = require(`./assets/pages/Interpolation1x1/${name}.png`);
 }
 
 let pageActuelle = 0;
