@@ -129,12 +129,6 @@ export default function App() {
             // On récupère la meilleure image.
             meilleureImage = numeroImage === 1 ? img1[0] : img2[0];
 
-            let obj = {
-                name: meilleureImage,
-                rating: "BEST"
-            };
-            scoresImages.push(obj);
-
             for (let i = 0; i < nomsImagePageActuellePhase2.length; ++i) {
                  // On enlève l'image originale de la liste des images à noter.
                 if (nomsImagePageActuellePhase2[i] === imageOrigine[0]) {
@@ -163,9 +157,14 @@ export default function App() {
     // Fonction qui permet d'afficher toutes les images à noter dans la phase 2 de manière aléatoire.
     function imageSuivantePhase2() {
         if (selectedRating !== 0) {
+            //Si c'est la meilleur image, on l'indique dans la position stockée dans le csv
+            let position;
+            position = meilleureImage !== img3[0] ? "": "Meilleure";
+
             let obj = {
                 name: img3[0],
-                rating: selectedRating
+                rating: selectedRating,
+                position: position
             };
             scoresImages.push(obj);
 
@@ -247,7 +246,7 @@ export default function App() {
 
         // On ajoute les noms ainsi que les scores associés au fichier CSV.
         for (let i = 0; i < scoresImages.length; ++i) {
-            content += `${scoresImages[i].name}, ${scoresImages[i].rating}\n`;
+            content += `${scoresImages[i].name}, ${scoresImages[i].rating}, ${scoresImages[i].position}\n`;
         }
 
         // Création d'un lien de téléchargement pour le fichier CSV.
