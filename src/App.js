@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Cookies from 'js-cookie';
 import {TransformComponent, TransformWrapper} from "react-zoom-pan-pinch";
 import PasswordModal from "./components/PasswordModal";
@@ -68,6 +68,9 @@ let meilleureImage = null;
 
 // Variable qui gère les notes données aux images
 let scoresImages = [];
+let lettresMoteur = ['A', 'B', 'C', 'D', 'E']
+let lett1 = lettresMoteur.splice(0, 1);
+let lett2 = lettresMoteur.splice(0, 1);
 
 export default function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -80,6 +83,10 @@ export default function App() {
     const [image1, setImage1] = useState(img1);
     const [image2, setImage2] = useState(img2);
     const [image3, setImage3] = useState(img3);
+
+    const [lettre1, setLettre1] = useState(lett1);
+    const [lettre2, setLettre2] = useState(lett2);
+
 
     const [rating1, setRating1] = useState(false);
     const [rating2, setRating2] = useState(false);
@@ -145,12 +152,17 @@ export default function App() {
         } else {
             // Si on choisit l'image 2 on enlève la 1 et inversement
             if (numeroImage === 2) {
-                img1 = nomsImagePageActuelle.splice(Math.floor(Math.random() * nomsImagePageActuelle.length - 1) + 1, 1);
+                let lettre1 = lettresMoteur.splice(0, 1);
+                img1 = nomsImagePageActuelle.splice(0, 1);
+                setImage1(img1);
+                setLettre1(lettre1[0]);
             } else {
+                let lettre2 = lettresMoteur.splice(0, 1);
                 img2 = nomsImagePageActuelle.splice(Math.floor(Math.random() * nomsImagePageActuelle.length - 1) + 1, 1);
+                setImage2(img2);
+                setLettre2(lettre2[0]);
             }
-            setImage1(img1);
-            setImage2(img2);
+
         }
     }
 
@@ -186,6 +198,12 @@ export default function App() {
                 imageOrigine = nomsImagePageActuelle.splice(0, 1)
                 img1 = nomsImagePageActuelle.splice(Math.floor(Math.random() * nomsImagePageActuelle.length - 1) + 1, 1);
                 img2 = nomsImagePageActuelle.splice(Math.floor(Math.random() * nomsImagePageActuelle.length - 1) + 1, 1);
+
+                lettresMoteur = ['A', 'B', 'C', 'D', 'E']
+                lett1 = lettresMoteur.splice(0, 1);
+                lett2 = lettresMoteur.splice(0, 1);
+                setLettre1(lett1[0]);
+                setLettre2(lett2[0]);
 
                 meilleureImage = null;
                 img3 = null;
@@ -364,6 +382,7 @@ export default function App() {
                                     <button className="button" type="button"
                                             onClick={() => imageSuivantePhase1(1)}> Celle de gauche !
                                     </button>
+                                    <p>{lettre1}</p>
                                 </div>
                                 <div className="image">
                                     <TransformWrapper
@@ -381,6 +400,7 @@ export default function App() {
                                     <button className="button" type="button"
                                             onClick={() => imageSuivantePhase1(2)}> Celle de droite !
                                     </button>
+                                    <p>{lettre2}</p>
                                 </div>
                             </div>
                         </main>
