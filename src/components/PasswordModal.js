@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-// Gère l'affichage du modal de saisie du mot de passe
+// Fonction qui gère l'affichage du modal de saisie du mot de passe
 export default function PasswordModal({setPassword, errorMessage}) {
     const [passwordInput, setPasswordInput] = useState('');
 

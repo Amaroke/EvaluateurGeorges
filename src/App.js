@@ -56,12 +56,17 @@ for (let nom in images) {
     }
 }
 
+// Image d'origine de la phase 1
 let imageOrigine = nomsImagePageActuelle.splice(0, 1)
+// Images affichés lors de la phase 1
 let img1 = nomsImagePageActuelle.splice(Math.floor(Math.random() * nomsImagePageActuelle.length - 1) + 1, 1);
 let img2 = nomsImagePageActuelle.splice(Math.floor(Math.random() * nomsImagePageActuelle.length - 1) + 1, 1);
+
+// Images affichés lors de la phase 2
 let img3 = null;
 let meilleureImage = null;
 
+// Variable qui gère les notes données aux images
 let scoresImages = [];
 
 export default function App() {
@@ -89,6 +94,7 @@ export default function App() {
     const wrapperRef1 = useRef(null);
     const wrapperRef2 = useRef(null);
 
+    // Fonction qui check si le password fourni est correct et qui agit en conséquence
     function handlePasswordSubmit(submittedPassword) {
         if (submittedPassword === 'IopetiMathieuYvoz') {
             Cookies.set('password', submittedPassword, {expires: 1});
@@ -106,15 +112,19 @@ export default function App() {
         }
     }, []);
 
+    // Fonction qui ferme le fenêtre modale
     function handleCloseModal() {
         setIsModalOpen(false);
     }
 
+    // Fonction qui ouvre la fenêtre modale
     function handleOpenModal() {
         setIsModalOpen(true);
     }
 
+    // Fonction qui permet de gérer l'affichage des images lors de la phase 1
     function imageSuivantePhase1(numeroImage) {
+        // Si il n'y a plus d'images à afficher
         if (nomsImagePageActuelle.length === 0) {
             // On récupère la meilleure image.
             meilleureImage = numeroImage === 1 ? img1[0] : img2[0];
@@ -131,18 +141,20 @@ export default function App() {
                     nomsImagePageActuellePhase2.splice(i, 1);
                 }
 
-                // On enlève l'image originale de la liste des images à noter.
+                // On enlève l'image originale de la liste des images à noter..
                 if (nomsImagePageActuellePhase2[i] === imageOrigine[0]) {
                     nomsImagePageActuellePhase2.splice(i, 1);
                 }
             }
 
-            // On mélange les images à noter.
+            // On mélange les images à noter
             img3 = nomsImagePageActuellePhase2.splice(Math.floor(Math.random() * nomsImagePageActuelle.length - 1) + 1, 1);
             setImage3(img3);
 
+            //On passe à la phase 2
             setIsPhase2(true);
         } else {
+            // Si on choisit l'image 2 on enlève la 1 et inversement
             if (numeroImage === 2) {
                 img1 = nomsImagePageActuelle.splice(Math.floor(Math.random() * nomsImagePageActuelle.length - 1) + 1, 1);
             } else {
@@ -163,7 +175,6 @@ export default function App() {
             scoresImages.push(obj);
 
             if (nomsImagePageActuellePhase2.length === 0) {
-
                 pageActuelle++
                 nomImagePageActuelle = listeNomsImages[pageActuelle]
                 setSelectedImage(listeNomsImages[pageActuelle]);
@@ -198,8 +209,12 @@ export default function App() {
         }
     }
 
+    // Fonction qui gère la notation d'une image
     function handleNotation(imageNotee, note, noteSelectionnee) {
+        // On fixe la note de l'image
         setSelectedRating(noteSelectionnee)
+
+        // Affichage des étoiles (et effet de séléction)
         switch (imageNotee) {
             case 1:
                 setRating1(note || noteSelectionnee >= 1);
@@ -262,7 +277,6 @@ export default function App() {
         wrapperRef1.current.setTransform(zoom.positionX, zoom.positionY, zoom.scale);
         wrapperRef2.current.setTransform(zoom.positionX, zoom.positionY, zoom.scale);
     }
-
     return (
         <div>
             {isLoggedIn ? (
