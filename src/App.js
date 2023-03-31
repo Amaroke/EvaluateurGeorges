@@ -8,7 +8,24 @@ import './App.css';
 const listeNomsImages = [
     "barb_0001-4133_1919_num_5_1_T1_0021_0000",
     "barb_0001-4133_1919_num_5_1_T1_0613_0000",
-    "barb_0001-4133_1920_num_6_1_T1_0012_0000"
+    "barb_0001-4133_1920_num_6_1_T1_0012_0000",
+    "barb_0001-4133_1920_num_6_1_T1_0296_0000",
+    "barb_0001-4133_1929_num_15_1_T1_0235_0000",
+    "barb_0001-4133_1939_num_25_1_T1_0321_0000",
+    "barb_0001-4133_1941_num_27_1_T1_0022_0000",
+    "barb_0001-4133_1963_num_49_1_T1_0135_0000",
+    "barb_0001-4141_1907_num_9_1_T1_0675_0000",
+    "rnord_0035-2624_1934_num_20_78_T1_0117_0000",
+    "rnord_0035-2624_1952_num_34_133_T1_0080_0000",
+    "barb_0001-4133_1919_num_5_1_T1_0005_0000",
+    "barb_0001-4133_1919_num_5_1_T1_0006_0000",
+    "barb_0001-4141_1910_num_12_1_F_0001_0000",
+    "barb_0001-4141_1910_num_12_1_F_0002_0000",
+    "barb_0001-4141_1910_num_12_1_T1_0017_0000",
+    "barb_0001-4141_1919_num_5_1_T1_0007_0000",
+    "rnord_0035-2624_1927_num_13_51_T1_0172_0000",
+    "rnord_0035-2624_1927_num_13_51_T1_0180_0001",
+    "rnord_0035-2624_1928_num_14_53_T1_0023_0000"
 ];
 
 // Import des images des étoiles
@@ -18,11 +35,12 @@ const etoileVide = require(`./assets/stars/etoile_vide.png`);
 // Création d'un objet contenant toutes les images
 const images = {};
 for (let name of listeNomsImages) {
-    images[name] = require(`./assets/pages/${name}/${name}.png`);
-    images[`${name}_expert`] = require(`./assets/pages/${name}/${name}_expert.png`);
-    images[`${name}_approximation1`] = require(`./assets/pages/${name}/${name}_approximation1.png`);
-    images[`${name}_approximation2`] = require(`./assets/pages/${name}/${name}_approximation2.png`);
-    images[`${name}_extrapolation`] = require(`./assets/pages/${name}/${name}_extrapolation.png`);
+    images[name] = require(`./assets/pages/Origine/${name}.png`);
+    images[`${name}_approximation1`] = require(`./assets/pages/Approximation1x1/${name}.png`);
+    images[`${name}_approximation2`] = require(`./assets/pages/Approximation2x3/${name}.png`);
+    images[`${name}_extrapolation`] = require(`./assets/pages/Extrapolation1x1/${name}.png`);
+    images[`${name}_approximation2`] = require(`./assets/pages/Extrapolation2x3/${name}.png`);
+    images[`${name}_extrapolation`] = require(`./assets/pages/Interpolation1x1/${name}.png`);
 }
 
 let pageActuelle = 0;
