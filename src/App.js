@@ -306,6 +306,7 @@ export default function App() {
                                 <div className="image-container">
                                     <div className="image">
                                         <TransformWrapper
+                                            maxScale={30}
                                             defaultScale={1}
                                             defaultPositionX={1}
                                             defaultPositionY={1}
@@ -323,6 +324,7 @@ export default function App() {
                                     </div>
                                     <div className="image">
                                         <TransformWrapper
+                                            maxScale={30}
                                             defaultScale={1}
                                             defaultPositionX={1}
                                             defaultPositionY={1}
@@ -353,6 +355,7 @@ export default function App() {
                             <div className="image-container2">
                                 <div className="image">
                                     <TransformWrapper
+                                        maxScale={30}
                                         defaultScale={1}
                                         defaultPositionX={1}
                                         defaultPositionY={1}
@@ -370,6 +373,7 @@ export default function App() {
                                 </div>
                                 <div className="image">
                                     <TransformWrapper
+                                        maxScale={30}
                                         defaultScale={1}
                                         defaultPositionX={1}
                                         defaultPositionY={1}
@@ -390,6 +394,7 @@ export default function App() {
                                 </div>
                                 <div className="image">
                                     <TransformWrapper
+                                        maxScale={30}
                                         defaultScale={1}
                                         defaultPositionX={1}
                                         defaultPositionY={1}
