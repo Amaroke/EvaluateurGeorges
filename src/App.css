@@ -90,6 +90,10 @@ img {
     cursor: pointer;
 }
 
+.menu {
+    z-index: 100;
+}
+
 .saveButton:hover {
     background-color: rgb(41, 128, 185);
     color: rgb(255, 255, 255);
