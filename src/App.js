@@ -24,7 +24,6 @@ const listeNomsImages = [
     "barb_0001-4141_1910_num_12_1_T1_0017_0000",
     "barb_0001-4141_1919_num_5_1_T1_0007_0000",
     "rnord_0035-2624_1927_num_13_51_T1_0172_0000",
-    "rnord_0035-2624_1927_num_13_51_T1_0180_0001",
     "rnord_0035-2624_1928_num_14_53_T1_0023_0000"
 ];
 
@@ -41,6 +40,8 @@ for (let name of listeNomsImages) {
     images[`${name}_extrapolation1x1`] = require(`./assets/pages/Extrapolation1x1/${name}.png`);
     images[`${name}_extrapolation2x3`] = require(`./assets/pages/Extrapolation2x3/${name}.png`);
     images[`${name}_interpolation1x1`] = require(`./assets/pages/Interpolation1x1/${name}.png`);
+    images[`${name}_interpolation2x3`] = require(`./assets/pages/Interpolation2x3/${name}.png`);
+    images[`${name}_persee`] = require(`./assets/pages/Persee/${name}.png`);
 }
 
 let pageActuelle = 0;
@@ -68,7 +69,7 @@ let meilleureImage = null;
 
 // Variable qui gère les notes données aux images
 let scoresImages = [];
-let lettresMoteur = ['A', 'B', 'C', 'D', 'E']
+let lettresMoteur = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 let lett1 = lettresMoteur.splice(0, 1);
 let lett2 = lettresMoteur.splice(0, 1);
 
@@ -199,7 +200,7 @@ export default function App() {
                 img1 = nomsImagePageActuelle.splice(Math.floor(Math.random() * nomsImagePageActuelle.length - 1) + 1, 1);
                 img2 = nomsImagePageActuelle.splice(Math.floor(Math.random() * nomsImagePageActuelle.length - 1) + 1, 1);
 
-                lettresMoteur = ['A', 'B', 'C', 'D', 'E']
+                lettresMoteur = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
                 lett1 = lettresMoteur.splice(0, 1);
                 lett2 = lettresMoteur.splice(0, 1);
                 setLettre1(lett1[0]);
@@ -306,7 +307,7 @@ export default function App() {
                                 <div className="image-container">
                                     <div className="image">
                                         <TransformWrapper
-                                            maxScale={30}
+                                            maxScale={70}
                                             defaultScale={1}
                                             defaultPositionX={1}
                                             defaultPositionY={1}
@@ -324,7 +325,7 @@ export default function App() {
                                     </div>
                                     <div className="image">
                                         <TransformWrapper
-                                            maxScale={30}
+                                            maxScale={70}
                                             defaultScale={1}
                                             defaultPositionX={1}
                                             defaultPositionY={1}
@@ -355,7 +356,7 @@ export default function App() {
                             <div className="image-container2">
                                 <div className="image">
                                     <TransformWrapper
-                                        maxScale={30}
+                                        maxScale={70}
                                         defaultScale={1}
                                         defaultPositionX={1}
                                         defaultPositionY={1}
@@ -373,7 +374,7 @@ export default function App() {
                                 </div>
                                 <div className="image">
                                     <TransformWrapper
-                                        maxScale={30}
+                                        maxScale={70}
                                         defaultScale={1}
                                         defaultPositionX={1}
                                         defaultPositionY={1}
@@ -394,7 +395,7 @@ export default function App() {
                                 </div>
                                 <div className="image">
                                     <TransformWrapper
-                                        maxScale={30}
+                                        maxScale={70}
                                         defaultScale={1}
                                         defaultPositionX={1}
                                         defaultPositionY={1}
