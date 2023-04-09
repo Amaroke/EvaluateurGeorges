@@ -173,7 +173,7 @@ export default function App() {
     // Fonction qui permet d'afficher toutes les images à noter dans la phase 2 de manière aléatoire.
     function imageSuivantePhase2() {
         if (selectedRating !== 0) {
-            //Si c'est la meilleur image, on l'indique dans la position stockée dans le csv
+            // Si c'est la meilleure image, on l'indique dans la position stockée dans le csv
             let position;
             position = meilleureImage !== img3[0] ? "": "Meilleure";
 
@@ -436,6 +436,9 @@ export default function App() {
     function partieNotation() {
         return (
             <div>
+                <div className="texte-cadre">
+                    <p className="lettre">{lettre3}</p>
+                </div>
                 <div className="button2-container">
                     <button className="button2"
                             data-rating="1"
@@ -482,15 +485,10 @@ export default function App() {
                         />
                     </button>
                 </div>
-                <div className="texte-cadre">
-                    <p className="lettre">{lettre3}</p>
-                </div>
                 <button
                     className="button"
                     onClick={() => imageSuivantePhase2()}>{selectedRating === 0 ? "Indiquez une note" : descriptionRatings[selectedRating - 1]}</button>
             </div>
-
         );
     }
 }
-
