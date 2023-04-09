@@ -70,8 +70,10 @@ let meilleureImage = null;
 // Variable qui gère les notes données aux images
 let scoresImages = [];
 let lettresMoteur = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+let lettresEval = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 let lett1 = lettresMoteur.splice(0, 1);
 let lett2 = lettresMoteur.splice(0, 1);
+let lett3 = lettresEval.splice(0, 1);
 
 export default function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -87,6 +89,7 @@ export default function App() {
 
     const [lettre1, setLettre1] = useState(lett1);
     const [lettre2, setLettre2] = useState(lett2);
+    const [lettre3, setLettre3] = useState(lett3);
 
 
     const [rating1, setRating1] = useState(false);
@@ -201,10 +204,13 @@ export default function App() {
                 img2 = nomsImagePageActuelle.splice(Math.floor(Math.random() * nomsImagePageActuelle.length - 1) + 1, 1);
 
                 lettresMoteur = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+                lettresEval = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
                 lett1 = lettresMoteur.splice(0, 1);
                 lett2 = lettresMoteur.splice(0, 1);
+                lett3 = lettresEval.splice(0, 1);
                 setLettre1(lett1[0]);
                 setLettre2(lett2[0]);
+                setLettre3(lett3[0]);
 
                 meilleureImage = null;
                 img3 = null;
@@ -216,7 +222,9 @@ export default function App() {
 
                 setIsPhase2(false);
             } else {
+                let lettre3 = lettresEval.splice(0, 1);
                 img3 = nomsImagePageActuellePhase2.splice(Math.floor(Math.random() * nomsImagePageActuelle.length - 1) + 1, 1);
+                setLettre3(lettre3[0]);
                 setImage3(img3);
             }
         }
@@ -473,6 +481,9 @@ export default function App() {
                             alt="Étoile 4"
                         />
                     </button>
+                </div>
+                <div className="texte-cadre">
+                    <p className="lettre">{lettre3}</p>
                 </div>
                 <button
                     className="button"
